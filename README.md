@@ -16,8 +16,8 @@ Aplikasi ini dirancang menggunakan **Next.js 14+ (App Router)**, **TypeScript**,
      - **TOS (*Traffic Organization Service*)**: Layanan Pengaturan Lalu Lintas Kapal & Labuh Jangkar.
      - **NAS (*Navigational Assistance Service*)**: Layanan Bantuan Navigasi Kapal Cuaca Buruk / Alur Sempit.
      *Dilengkapi dialog modal rincian prosedur.*
-   - **`#traffic`**: Peta WebGIS interaktif berbasis Leaflet yang menampilkan koordinat Stasiun VTS Panjang (`-5.4746, 105.3142`), radius jangkauan radar 24 NM, filter tipe kapal, dan simulasi pergerakan kapal AIS real-time (Cargo, Tanker, Ferry, Tugboat).
-   - **`#kontak`**: Akses cepat informasi kontak darurat maritim pada Footer.
+   - **`#traffic`**: Peta WebGIS interaktif berbasis Leaflet yang menampilkan koordinat Stasiun VTS Panjang (`-5.455007552545647, 105.31086450790356`) dan radius jangkauan radar 24 NM.
+    - **`#kontak`**: Akses cepat informasi kontak darurat maritim pada Footer.
 
 2. **Sub-Halaman Khusus (Dedicated Sub-Pages)**:
    - **`/fasilitas`**: Galeri grid interaktif 6 fasilitas operasional utama (*Control Room 24/7*, *Server Room Data Center*, *Menara Radar & Sensor Array*, *Gedung Kantor Administrasi*, *Ruang Briefing*, dan *Crew Rest Lounge*).
@@ -58,7 +58,7 @@ d:/S7/PJK/
 │   ├── About.tsx                 # Profil Stasiun VTS Panjang & Wilayah Cakupan Teluk Lampung
 │   ├── Services.tsx              # Kartu Layanan Utama VTS (INS, TOS, NAS) dengan Modal
 │   ├── MapSection.tsx            # Pembungkus Peta WebGIS (Dynamic Import Client-Side)
-│   └── LeafletMap.tsx            # Komponen Client Peta WebGIS (-5.4746, 105.3142) dengan Simulasi Kapal
+│   └── LeafletMap.tsx            # Komponen Client Peta WebGIS (-5.455007552545647, 105.31086450790356)
 ├── tailwind.config.ts            # Konfigurasi Tema Warna Maritime & Animasi Radar
 ├── package.json                  # Manajemen Dependensi Proyek
 └── tsconfig.json                 # Konfigurasi TypeScript

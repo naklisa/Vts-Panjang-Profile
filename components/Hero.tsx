@@ -96,7 +96,7 @@ export default function Hero() {
               <span className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider">VTS COORDINATE</span>
               <MapPin className="w-4 h-4 text-cyan-400 group-hover:translate-y-0.5 transition-transform" />
             </div>
-            <div className="text-lg font-bold text-white font-mono">05°28'S 105°18'E</div>
+            <div className="text-lg font-bold text-white font-mono">05°27'S 105°18'E</div>
             <p className="text-[11px] text-slate-400 mt-1">Stasiun VTS Panjang</p>
           </div>
 
