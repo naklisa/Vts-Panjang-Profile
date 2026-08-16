@@ -1,10 +1,34 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Info, Shield, HelpCircle, ArrowRight, Check, Sparkles, X, Radio, AlertTriangle } from 'lucide-react';
 
 export default function Services() {
   const [activeModal, setActiveModal] = useState<number | null>(null);
+
+  // Close modal handlers for ESC key, mobile back button, and body scroll lock
+  useEffect(() => {
+    if (activeModal === null) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveModal(null);
+    };
+
+    const handlePopState = () => {
+      setActiveModal(null);
+    };
+
+    window.history.pushState({ modalOpen: true }, '');
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('popstate', handlePopState);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('popstate', handlePopState);
+      document.body.style.overflow = '';
+    };
+  }, [activeModal]);
 
   const services = [
     {
@@ -69,7 +93,7 @@ export default function Services() {
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-cyan-600/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-cyan-800/40 text-cyan-400 text-xs font-mono mb-4">
@@ -80,7 +104,7 @@ export default function Services() {
             3 Layanan Standar Internasional IALA
           </h2>
           <p className="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-            Stasiun VTS Panjang menyelenggarakan 3 pilar layanan VTS sesuai dengan standar dunia IALA (*International Association of Marine Aids to Navigation and Lighthouse Authorities*).
+            Stasiun VTS Panjang menyelenggarakan 3 pilar layanan VTS sesuai dengan standar dunia IALA <br /> <strong className="text-cyan-400"> (International Association of Marine Aids to Navigation and Lighthouse Authorities) </strong>.
           </p>
         </div>
 
@@ -145,7 +169,10 @@ export default function Services() {
 
         {/* Modal Dialog */}
         {activeModal !== null && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+          <div
+            onClick={() => setActiveModal(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fadeIn overflow-y-auto"
+          >
             {services
               .filter((s) => s.id === activeModal)
               .map((srv) => {
@@ -153,47 +180,54 @@ export default function Services() {
                 return (
                   <div
                     key={srv.id}
-                    className="bg-slate-900 border border-cyan-500/40 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative text-left"
+                    onClick={(e) => e.stopPropagation()}
+                    className="bg-slate-900 border border-cyan-500/40 rounded-3xl p-5 sm:p-7 max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl relative text-left my-auto overflow-hidden"
                   >
-                    <button
-                      onClick={() => setActiveModal(null)}
-                      className="absolute top-5 right-5 p-2 rounded-xl bg-slate-950 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
-
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="p-3 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-                        <IconComp className="w-6 h-6" />
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-4 shrink-0 pr-8">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2.5 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
+                          <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
+                        </div>
+                        <div>
+                          <span className="text-[11px] font-mono text-cyan-400 font-bold">{srv.code} SERVICE</span>
+                          <h3 className="text-lg sm:text-xl font-bold text-white">{srv.title}</h3>
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-xs font-mono text-cyan-400 font-bold">{srv.code} SERVICE</span>
-                        <h3 className="text-xl font-bold text-white">{srv.title}</h3>
-                      </div>
+                      <button
+                        onClick={() => setActiveModal(null)}
+                        className="absolute top-5 right-5 p-2 rounded-xl bg-slate-950 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
                     </div>
 
-                    <p className="text-xs text-slate-400 font-mono mb-4 border-b border-slate-800 pb-3">
-                      {srv.ialadef}
-                    </p>
+                    {/* Scrollable Body */}
+                    <div className="overflow-y-auto flex-1 pr-1 space-y-4">
+                      <p className="text-xs text-slate-400 font-mono border-b border-slate-800 pb-3">
+                        {srv.ialadef}
+                      </p>
 
-                    <p className="text-xs sm:text-sm text-slate-300 mb-4 leading-relaxed">
-                      {srv.shortDesc}
-                    </p>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        {srv.shortDesc}
+                      </p>
 
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider mb-3">
-                      Cakupan Operasional & Prosedur Panggilan:
-                    </h4>
+                      <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                        Cakupan Operasional & Prosedur Panggilan:
+                      </h4>
 
-                    <ul className="space-y-3 mb-6">
-                      {srv.details.map((item, i) => (
-                        <li key={i} className="flex items-start space-x-2 text-xs text-slate-300 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                          <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      <ul className="space-y-2.5">
+                        {srv.details.map((item, i) => (
+                          <li key={i} className="flex items-start space-x-2 text-xs text-slate-300 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
+                            <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                    <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
+                    {/* Footer */}
+                    <div className="pt-4 mt-4 border-t border-slate-800 flex items-center justify-between shrink-0">
                       <span className="text-[11px] font-mono text-slate-400">PANGGILAN VTS: "PANJANG VTS"</span>
                       <button
                         onClick={() => setActiveModal(null)}
@@ -212,3 +246,4 @@ export default function Services() {
     </section>
   );
 }
+

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -42,7 +42,7 @@ interface Facility {
 export default function FasilitasPage() {
   // State for active photo per facility card (default index 0)
   const [activePhotoIndexes, setActivePhotoIndexes] = useState<{ [key: number]: number }>({});
-  
+
   // State for Fullscreen Lightbox Modal
   const [lightbox, setLightbox] = useState<{
     facilityTitle: string;
@@ -245,6 +245,32 @@ export default function FasilitasPage() {
     },
   ];
 
+  // Close lightbox modal handlers for ESC key, mobile back button, and body scroll lock
+  useEffect(() => {
+    if (!lightbox) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowRight') nextLightboxPhoto();
+      if (e.key === 'ArrowLeft') prevLightboxPhoto();
+    };
+
+    const handlePopState = () => {
+      setLightbox(null);
+    };
+
+    window.history.pushState({ modalOpen: true }, '');
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('popstate', handlePopState);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('popstate', handlePopState);
+      document.body.style.overflow = '';
+    };
+  }, [lightbox]);
+
   const handleSelectPhoto = (facilityId: number, index: number) => {
     setActivePhotoIndexes((prev) => ({ ...prev, [facilityId]: index }));
   };
@@ -286,7 +312,7 @@ export default function FasilitasPage() {
           <span>Kembali ke Beranda</span>
         </Link>
 
-        <div className="text-left max-w-3xl">
+        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/50 text-cyan-400 text-xs font-mono mb-3">
             <Zap className="w-3.5 h-3.5" />
             <span>SARANA & PRASARANA CANGGIH (DOKUMENTASI FOTO REGULER)</span>
@@ -356,11 +382,10 @@ export default function FasilitasPage() {
                         <button
                           key={pIdx}
                           onClick={() => handleSelectPhoto(facility.id, pIdx)}
-                          className={`relative w-12 h-8 rounded-lg overflow-hidden border transition-all ${
-                            currentPhotoIdx === pIdx
-                              ? 'border-cyan-400 ring-2 ring-cyan-500/30 scale-105'
-                              : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-600'
-                          }`}
+                          className={`relative w-12 h-8 rounded-lg overflow-hidden border transition-all ${currentPhotoIdx === pIdx
+                            ? 'border-cyan-400 ring-2 ring-cyan-500/30 scale-105'
+                            : 'border-slate-800 opacity-60 hover:opacity-100 hover:border-slate-600'
+                            }`}
                         >
                           <img
                             src={photo.url}
@@ -429,59 +454,65 @@ export default function FasilitasPage() {
 
         {/* Lightbox Modal */}
         {lightbox && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-xl animate-fadeIn">
-            <div className="relative max-w-4xl w-full bg-slate-900 border border-cyan-500/40 rounded-3xl overflow-hidden shadow-2xl">
+          <div
+            onClick={() => setLightbox(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/90 backdrop-blur-xl animate-fadeIn overflow-y-auto"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full max-h-[85vh] flex flex-col bg-slate-900 border border-cyan-500/40 rounded-3xl overflow-hidden shadow-2xl my-auto"
+            >
               {/* Header Modal */}
-              <div className="flex items-center justify-between p-4 sm:p-6 bg-slate-950 border-b border-slate-800">
+              <div className="flex items-center justify-between p-4 sm:p-5 bg-slate-950 border-b border-slate-800 shrink-0">
                 <div>
                   <span className="text-xs font-mono text-cyan-400 font-bold">DOKUMENTASI FOTO FASILITAS</span>
-                  <h3 className="text-lg font-bold text-white">{lightbox.facilityTitle}</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-white">{lightbox.facilityTitle}</h3>
                 </div>
                 <button
                   onClick={() => setLightbox(null)}
                   className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
 
               {/* Main Image Display */}
-              <div className="relative aspect-video w-full bg-black flex items-center justify-center">
+              <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden flex-1 min-h-0">
                 <img
                   src={lightbox.photos[lightbox.currentIndex].url}
                   alt={lightbox.photos[lightbox.currentIndex].caption}
-                  className="max-h-[60vh] w-full object-contain"
+                  className="max-h-full max-w-full object-contain"
                 />
 
                 {/* Prev & Next Buttons */}
                 <button
                   onClick={prevLightboxPhoto}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-slate-950/80 border border-cyan-800/60 text-white hover:text-cyan-400 hover:bg-slate-900 transition-all shadow-xl"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-2xl bg-slate-950/80 border border-cyan-800/60 text-white hover:text-cyan-400 hover:bg-slate-900 transition-all shadow-xl"
                   title="Foto Sebelumnya"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
                 <button
                   onClick={nextLightboxPhoto}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-2xl bg-slate-950/80 border border-cyan-800/60 text-white hover:text-cyan-400 hover:bg-slate-900 transition-all shadow-xl"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 sm:p-3 rounded-2xl bg-slate-950/80 border border-cyan-800/60 text-white hover:text-cyan-400 hover:bg-slate-900 transition-all shadow-xl"
                   title="Foto Selanjutnya"
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
 
                 {/* Camera Badge Overlay */}
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-lg bg-slate-950/80 border border-cyan-800/60 text-xs font-mono text-cyan-400 font-bold">
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-slate-950/80 border border-cyan-800/60 text-[11px] font-mono text-cyan-400 font-bold">
                   {lightbox.photos[lightbox.currentIndex].tag}
                 </div>
               </div>
 
               {/* Footer Caption & Thumbnail Strip */}
-              <div className="p-4 sm:p-6 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="text-left space-y-1">
-                  <p className="text-sm font-bold text-white">
+              <div className="p-4 sm:p-5 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+                <div className="text-left space-y-0.5">
+                  <p className="text-xs sm:text-sm font-bold text-white">
                     {lightbox.photos[lightbox.currentIndex].caption}
                   </p>
-                  <p className="text-xs font-mono text-slate-400">
+                  <p className="text-[11px] font-mono text-slate-400">
                     Foto {lightbox.currentIndex + 1} dari {lightbox.photos.length}
                   </p>
                 </div>
@@ -491,11 +522,10 @@ export default function FasilitasPage() {
                     <button
                       key={idx}
                       onClick={() => setLightbox({ ...lightbox, currentIndex: idx })}
-                      className={`relative w-16 h-10 rounded-lg overflow-hidden border transition-all ${
-                        lightbox.currentIndex === idx
-                          ? 'border-cyan-400 ring-2 ring-cyan-500/40 scale-105'
-                          : 'border-slate-800 opacity-50 hover:opacity-100'
-                      }`}
+                      className={`relative w-14 h-9 sm:w-16 sm:h-10 rounded-lg overflow-hidden border transition-all ${lightbox.currentIndex === idx
+                        ? 'border-cyan-400 ring-2 ring-cyan-500/40 scale-105'
+                        : 'border-slate-800 opacity-50 hover:opacity-100'
+                        }`}
                     >
                       <img src={p.url} alt={p.caption} className="w-full h-full object-cover" />
                     </button>
@@ -505,22 +535,6 @@ export default function FasilitasPage() {
             </div>
           </div>
         )}
-
-        {/* Bottom CTA Banner */}
-        <div className="mt-16 p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900 to-cyan-950 border border-cyan-900/40 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-xl font-bold text-white">Butuh Informasi Kunjungan Kedinasan?</h3>
-            <p className="text-xs text-slate-300 mt-1">
-              Kontak Kantor Distrik Navigasi Kelas I Panjang untuk prosedur studi banding atau kunjungan operasional.
-            </p>
-          </div>
-          <Link
-            href="/#kontak"
-            className="px-6 py-3 rounded-xl bg-cyan-500 text-slate-950 font-bold text-xs hover:bg-cyan-400 transition-colors shrink-0"
-          >
-            Hubungi Kontak Resmi
-          </Link>
-        </div>
       </div>
     </div>
   );
