@@ -6,10 +6,8 @@ import Image from 'next/image';
 import {
   Monitor,
   Server,
-  Radio,
   Building2,
   Users,
-  Coffee,
   ArrowLeft,
   ShieldCheck,
   Zap,
@@ -53,7 +51,39 @@ export default function FasilitasPage() {
   const facilities: Facility[] = [
     {
       id: 1,
-      title: 'Control Room 24/7 (Ruang Operasi VTS)',
+      title: 'Ruang Admin',
+      category: 'Administrasi',
+      icon: Building2,
+      status: 'ACTIVE WORK HOURS',
+      desc: 'Pusat pelayanan administrasi publik maritim, pengelolaan dokumen operasional, koordinasi instalasi, serta penerimaan tamu kedinasan.',
+      specs: [
+        'Ruang Kerja Pejabat & Staff Administrasi',
+        'Layanan Informasi & Arsip Maritim',
+        'Pusat Rekonsiliasi PNBP VTS',
+        'Pusat Dokumentasi & Logbook VTS',
+      ],
+      location: 'Gedung VTS Utama',
+      photos: [
+        {
+          url: '/images/fasilitas/Admin1.jpg',
+          caption: 'Ruang Kerja & Pelayanan Administrasi VTS',
+          tag: 'CAM 01 - ADMIN DESK',
+        },
+        {
+          url: '/images/fasilitas/Admin2.jpg',
+          caption: 'Fasilitas Layanan & Dokumentasi Surat VTS',
+          tag: 'CAM 02 - ADMIN OFFICE',
+        },
+        {
+          url: '/images/fasilitas/Admin3.jpg',
+          caption: 'Area Kerja Staf & Arsip Logbook Maritim',
+          tag: 'CAM 03 - ARCHIVE & WORKSPACE',
+        },
+      ],
+    },
+    {
+      id: 2,
+      title: 'Ruang Operator VTS',
       category: 'Operasional Utama',
       icon: Monitor,
       status: 'OPERATIONAL 24/7',
@@ -67,25 +97,25 @@ export default function FasilitasPage() {
       location: 'Lantai 2 Gedung VTS Utama',
       photos: [
         {
-          url: '/images/fasilitas/control-room-1.svg',
+          url: '/images/fasilitas/Operator_Room1.jpg',
           caption: 'Konsol Multi-Monitor 4K Operator VTS Panjang',
           tag: 'CAM 01 - MAIN CONSOLE',
         },
         {
-          url: '/images/fasilitas/control-room-2.svg',
-          caption: 'Video Wall Display 55" Real-Time AIS & Radar',
+          url: '/images/fasilitas/Operator_Room2.jpg',
+          caption: 'Video Wall Display Real-Time AIS & Radar',
           tag: 'CAM 02 - VIDEO WALL',
         },
         {
-          url: '/images/fasilitas/control-room-3.svg',
+          url: '/images/fasilitas/Operator_Room3.jpg',
           caption: 'Stasiun Kerja Radio Komunikasi VHF Maritim',
           tag: 'CAM 03 - VHF DISPATCH',
         },
       ],
     },
     {
-      id: 2,
-      title: 'Server Room & Data Center',
+      id: 3,
+      title: 'Ruang Server',
       category: 'Infrastruktur IT',
       icon: Server,
       status: 'HIGH SECURITY',
@@ -99,147 +129,51 @@ export default function FasilitasPage() {
       location: 'Lantai 1 Gedung VTS Utama',
       photos: [
         {
-          url: '/images/fasilitas/server-room-1.svg',
+          url: '/images/fasilitas/Server_Room.jpg',
           caption: 'Rak Peladen & Data Storage AIS Telemetri',
           tag: 'CAM 01 - SERVER RACKS',
         },
         {
-          url: '/images/fasilitas/server-room-2.svg',
+          url: '/images/fasilitas/Server_Room2.jpg',
           caption: 'Sistem Pendingin Presisi PAC & FM200 Gas',
           tag: 'CAM 02 - PAC COOLING',
         },
         {
-          url: '/images/fasilitas/server-room-3.svg',
+          url: '/images/fasilitas/Server_Room3.jpg',
           caption: 'Catu Daya Redundan Dual UPS 20 KVA',
           tag: 'CAM 03 - DUAL UPS',
         },
       ],
     },
     {
-      id: 3,
-      title: 'Menara Radar & Sensor Array Substation',
-      category: 'Sensor & Transmitter',
-      icon: Radio,
-      status: 'ONLINE 24/7',
-      desc: 'Menara struktur baja setinggi 45 meter yang menopang pemancar Radar Maritim Dual Band (X & S Band), antena VHF Direction Finder, sensor cuaca otomatis, dan kamera CCTV HD Long-Range.',
-      specs: [
-        'Height: 45 Meters Lattice Tower',
-        'X-Band & S-Band Marine Radar Antennas',
-        'Automatic Weather Station (AWS)',
-        'Pan-Tilt-Zoom Thermal & Night Vision CCTV',
-      ],
-      location: 'Area Substation Bukit Stasiun Panjang',
-      photos: [
-        {
-          url: '/images/fasilitas/radar-tower-1.svg',
-          caption: 'Menara Lattice 45 Meter & Radar Dual Band',
-          tag: 'CAM 01 - RADAR TOWER',
-        },
-        {
-          url: '/images/fasilitas/radar-tower-2.svg',
-          caption: 'Antena Radar Maritim Band X & Band S',
-          tag: 'CAM 02 - RADAR ANTENNA',
-        },
-        {
-          url: '/images/fasilitas/radar-tower-3.svg',
-          caption: 'Sensor Meteorologi AWS & Kamera Thermal CCTV',
-          tag: 'CAM 03 - AWS & CCTV',
-        },
-      ],
-    },
-    {
       id: 4,
-      title: 'Gedung Kantor Utama Administrasi',
-      category: 'Administrasi',
-      icon: Building2,
-      status: 'ACTIVE WORK HOURS',
-      desc: 'Pusat pelayanan administrasi publik maritim, pengelolaan sertifikasi operator, koordinasi dengan Kantor Distrik Navigasi Kelas I Panjang, serta penerimaan tamu kedinasan.',
-      specs: [
-        'Ruang Kerja Pejabat Operasional',
-        'Layanan Informasi Publik Maritim',
-        'Akses Jaringan Terenkripsi',
-        'Pusat Dokumentasi & Logbook VTS',
-      ],
-      location: 'Gedung Depan Stasiun VTS',
-      photos: [
-        {
-          url: '/images/fasilitas/gedung-utama-1.svg',
-          caption: 'Fasad Depan Gedung Stasiun VTS Panjang',
-          tag: 'CAM 01 - MAIN FACADE',
-        },
-        {
-          url: '/images/fasilitas/gedung-utama-2.svg',
-          caption: 'Layanan Informasi Publik & Pelayanan Maritim',
-          tag: 'CAM 02 - SERVICE DESK',
-        },
-        {
-          url: '/images/fasilitas/gedung-utama-3.svg',
-          caption: 'Pusat Dokumentasi & Logbook Resmi VTS',
-          tag: 'CAM 03 - ARCHIVE ROOM',
-        },
-      ],
-    },
-    {
-      id: 5,
-      title: 'Ruang Rapat & Briefing Operasional',
+      title: 'Ruang Rapat',
       category: 'Koordinasi',
       icon: Users,
-      status: 'AVAILABLE',
+      status: 'Meeting Room',
       desc: 'Fasilitas rapat interaktif yang digunakan untuk koordinasi SAR Maritim, briefing pergantian shift regu jaga, simulasi keadaan darurat, dan rapat evaluasi alur pelayaran.',
       specs: [
         'Interactive Smart Board 86"',
         'Video Conference Polycom System',
-        'Kapasitas 30 Personel',
+        'Kapasitas 15-20 Orang',
         'Akses Data GIS Pelayaran Real-Time',
       ],
       location: 'Lantai 2 Gedung VTS Utama',
       photos: [
         {
-          url: '/images/fasilitas/ruang-rapat-1.svg',
-          caption: 'Smart Board Interaktif 86" Briefing VTS',
+          url: '/images/fasilitas/Meeting_Room.jpg',
+          caption: 'Smart Board Interaktif & Briefing VTS',
           tag: 'CAM 01 - SMARTBOARD',
         },
         {
-          url: '/images/fasilitas/ruang-rapat-2.svg',
+          url: '/images/fasilitas/Meeting_Room2.jpg',
           caption: 'Ruang Rapat Koordinasi SAR Maritim & Instansi',
           tag: 'CAM 02 - CONFERENCE',
         },
         {
-          url: '/images/fasilitas/ruang-rapat-3.svg',
+          url: '/images/fasilitas/Meeting_Room3.jpg',
           caption: 'Konsul Evaluasi Pergantian Shift Regu Jaga',
           tag: 'CAM 03 - HANDOVER DESK',
-        },
-      ],
-    },
-    {
-      id: 6,
-      title: 'Ruang Istirahat Operator & Lounge Crew',
-      category: 'Fasilitas Personel',
-      icon: Coffee,
-      status: '24/7 COMFORT',
-      desc: 'Fasilitas rehat khusus bagi operator dan teknisi selama menjalankan tugas jaga siaga 24 jam berturut-turut demi menjaga fokus dan kebugaran staf operasional.',
-      specs: [
-        'Kamar Tidur Petugas Jaga Malam',
-        'Pantry & Coffee Station',
-        'Locker Room & Kamar Mandi',
-        'Ruang Santai & TV Monitoring',
-      ],
-      location: 'Lantai 1 Gedung VTS Sayap Timur',
-      photos: [
-        {
-          url: '/images/fasilitas/lounge-crew-1.svg',
-          caption: 'Kamar Rehat & Tidur Petugas Jaga Malam',
-          tag: 'CAM 01 - REST QUARTERS',
-        },
-        {
-          url: '/images/fasilitas/lounge-crew-2.svg',
-          caption: 'Pantry Stasiun & Automatic Coffee Station',
-          tag: 'CAM 02 - PANTRY AREA',
-        },
-        {
-          url: '/images/fasilitas/lounge-crew-3.svg',
-          caption: 'Ruang Santai Lounge & TV Stream CCTV Security',
-          tag: 'CAM 03 - CREW LOUNGE',
         },
       ],
     },
@@ -313,10 +247,6 @@ export default function FasilitasPage() {
         </Link>
 
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/50 text-cyan-400 text-xs font-mono mb-3">
-            <Zap className="w-3.5 h-3.5" />
-            <span>SARANA & PRASARANA CANGGIH (DOKUMENTASI FOTO REGULER)</span>
-          </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Fasilitas Operasional Stasiun VTS Panjang
           </h1>
@@ -326,7 +256,7 @@ export default function FasilitasPage() {
         </div>
 
         {/* Facilities Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
           {facilities.map((facility) => {
             const IconComp = facility.icon;
             const currentPhotoIdx = activePhotoIndexes[facility.id] ?? 0;
@@ -456,7 +386,7 @@ export default function FasilitasPage() {
         {lightbox && (
           <div
             onClick={() => setLightbox(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/90 backdrop-blur-xl animate-fadeIn overflow-y-auto"
+            className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-4 bg-slate-950/90 backdrop-blur-xl animate-fadeIn overflow-y-auto"
           >
             <div
               onClick={(e) => e.stopPropagation()}

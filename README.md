@@ -20,7 +20,7 @@ Aplikasi ini dirancang menggunakan **Next.js 14+ (App Router)**, **TypeScript**,
     - **`#kontak`**: Akses cepat informasi kontak darurat maritim pada Footer.
 
 2. **Sub-Halaman Khusus (Dedicated Sub-Pages)**:
-   - **`/fasilitas`**: Galeri grid interaktif 6 fasilitas operasional utama (*Control Room 24/7*, *Server Room Data Center*, *Menara Radar & Sensor Array*, *Gedung Kantor Administrasi*, *Ruang Briefing*, dan *Crew Rest Lounge*).
+   - **`/fasilitas`**: Galeri grid interaktif 4 fasilitas operasional utama (*Ruang Admin*, *Ruang Operator VTS*, *Ruang Server*, dan *Ruang Rapat*).
    - **`/struktur-organisasi`**: Bagan alur hierarki visual kepemimpinan dan unit operasional (Kepala Stasiun VTS -> Unit Operasional 24/7, Unit Teknik & Maintenance, Unit Administrasi Data), serta rincian rotasi regu jaga 24 jam (*Shift Roster A, B, C, D*).
 
 3. **Bilah Navigasi & Footer Global**:
@@ -48,7 +48,7 @@ d:/S7/PJK/
 │   ├── page.tsx                  # Halaman Utama / Beranda (#hero, #about, #layanan, #traffic, #kontak)
 │   ├── globals.css               # CSS Global, Leaflet styles, custom scrollbar
 │   ├── fasilitas/
-│   │   └── page.tsx              # Halaman Rute Khusus Fasilitas VTS (6 fasilitas utama)
+│   │   └── page.tsx              # Halaman Rute Khusus Fasilitas VTS (4 fasilitas utama)
 │   └── struktur-organisasi/
 │       └── page.tsx              # Halaman Rute Khusus Struktur Organisasi & Shift Roster
 ├── components/

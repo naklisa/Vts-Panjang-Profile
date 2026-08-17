@@ -158,7 +158,7 @@ export default function About() {
             <Scale className="w-6 h-6 text-cyan-400" />
             <div>
               <h3 className="text-xl font-bold text-white">Landasan Hukum & Regulasi Operasional</h3>
-              <p className="text-xs text-slate-400">Pedoman regulasi nasional dan standar internasional VTS Panjang (Sub-Bab 2.1 PDF)</p>
+              <p className="text-xs text-slate-400">Pedoman regulasi nasional dan standar internasional VTS Panjang</p>
             </div>
           </div>
 

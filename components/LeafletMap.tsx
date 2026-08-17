@@ -48,10 +48,10 @@ function createRadarStationIcon() {
 
 export default function LeafletMap() {
   return (
-    <div className="relative w-full h-[600px] rounded-3xl overflow-hidden border border-cyan-900/40 shadow-2xl bg-slate-950">
+    <div className="relative w-full h-[600px] rounded-3xl overflow-hidden border border-cyan-900/40 shadow-2xl bg-slate-950 isolate z-0">
 
       {/* Station Location Info Badge Header */}
-      <div className="absolute top-4 left-4 z-[1000] flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-slate-950/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-cyan-900/60 shadow-xl">
+      <div className="absolute top-4 left-4 z-20 flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-slate-950/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-cyan-900/60 shadow-xl">
         <div className="flex items-center space-x-2">
           <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
           <span className="text-xs font-mono font-bold text-cyan-400">STASIUN SENSOR VTS PANJANG</span>
@@ -59,15 +59,15 @@ export default function LeafletMap() {
       </div>
 
       {/* Live Radar Telemetry Status HUD */}
-      <div className="absolute bottom-4 left-4 z-[1000] hidden sm:block bg-slate-950/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 text-xs font-mono space-y-2 shadow-xl max-w-md">
+      <div className="absolute bottom-4 left-4 z-20 hidden sm:block bg-slate-950/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 text-xs font-mono space-y-2 shadow-xl max-w-md">
         <div className="text-[10px] text-cyan-400 font-bold tracking-wider uppercase mb-1 flex items-center justify-between">
-          <span>STASIUN SENSOR SENSOR VTS (PDF HAL. 2)</span>
+          <span>STASIUN SENSOR SENSOR VTS</span>
           <span className="text-emerald-400">2 STASIUN ONLINE</span>
         </div>
 
         <div className="p-2 rounded-xl bg-slate-900/90 border border-cyan-900/40 space-y-1">
           <div className="flex items-center justify-between text-cyan-300 font-bold">
-            <span>1. SROP-VTS PANJANG</span>
+            <span>1. VTS PANJANG</span>
             <span className="text-[10px] text-slate-400">05°27'19.0"S 105°18'38.0"E</span>
           </div>
           <p className="text-[11px] text-slate-400">Perangkat: AIS, Radio VHF, CCTV Long Range, AWS, VTS Data & Replay</p>

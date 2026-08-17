@@ -17,7 +17,7 @@ const LeafletMap = dynamic(() => import('./LeafletMap'), {
 
 export default function MapSection() {
   return (
-    <section id="traffic" className="py-24 bg-slate-900/70 border-t border-cyan-900/30 relative">
+    <section id="traffic" className="py-24 bg-slate-900/70 border-t border-cyan-900/30 relative z-0 isolate">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}

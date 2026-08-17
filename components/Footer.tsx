@@ -125,11 +125,11 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>+62 (0721) 31234 / +62 811-721-VTS</span>
+                <span>+62 (123) 4567 / +62 123-456-789</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span className="font-mono">vts.panjang@dephub.go.id</span>
+                <span className="font-mono">panjang.vts@gmail.com</span>
               </div>
               <div className="pt-2">
                 <a

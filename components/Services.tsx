@@ -104,7 +104,7 @@ export default function Services() {
             3 Layanan Standar Internasional IALA
           </h2>
           <p className="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
-            Stasiun VTS Panjang menyelenggarakan 3 pilar layanan VTS sesuai dengan standar dunia IALA <br /> <strong className="text-cyan-400"> (International Association of Marine Aids to Navigation and Lighthouse Authorities) </strong>.
+            Stasiun VTS Panjang menyelenggarakan 3 pilar layanan VTS sesuai dengan standar dunia IALA <br /> <strong className="text-cyan-400"> (International Association of Marine Aids to Navigation and Lighthouse Authorities)</strong>
           </p>
         </div>
 
@@ -171,7 +171,7 @@ export default function Services() {
         {activeModal !== null && (
           <div
             onClick={() => setActiveModal(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fadeIn overflow-y-auto"
+            className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fadeIn overflow-y-auto"
           >
             {services
               .filter((s) => s.id === activeModal)
