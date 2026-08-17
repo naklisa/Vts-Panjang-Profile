@@ -59,28 +59,6 @@ export default function LeafletMap() {
       </div>
 
       {/* Live Radar Telemetry Status HUD */}
-      <div className="absolute bottom-4 left-4 z-20 hidden sm:block bg-slate-950/90 backdrop-blur-md p-4 rounded-2xl border border-slate-800 text-xs font-mono space-y-2 shadow-xl max-w-md">
-        <div className="text-[10px] text-cyan-400 font-bold tracking-wider uppercase mb-1 flex items-center justify-between">
-          <span>STASIUN SENSOR SENSOR VTS</span>
-          <span className="text-emerald-400">2 STASIUN ONLINE</span>
-        </div>
-
-        <div className="p-2 rounded-xl bg-slate-900/90 border border-cyan-900/40 space-y-1">
-          <div className="flex items-center justify-between text-cyan-300 font-bold">
-            <span>1. VTS PANJANG</span>
-            <span className="text-[10px] text-slate-400">05°27'19.0"S 105°18'38.0"E</span>
-          </div>
-          <p className="text-[11px] text-slate-400">Perangkat: AIS, Radio VHF, CCTV Long Range, AWS, VTS Data & Replay</p>
-        </div>
-
-        <div className="p-2 rounded-xl bg-slate-900/90 border border-amber-900/40 space-y-1">
-          <div className="flex items-center justify-between text-amber-300 font-bold">
-            <span>2. GUNUNG KUNYIT SENSOR</span>
-            <span className="text-[10px] text-slate-400">05°26'49.0"S 105°16'54.4"E</span>
-          </div>
-          <p className="text-[11px] text-slate-400">Perangkat Utama: <strong>Radar System (Band-X & Band-S)</strong></p>
-        </div>
-      </div>
 
       {/* Actual React-Leaflet Map */}
       <MapContainer
